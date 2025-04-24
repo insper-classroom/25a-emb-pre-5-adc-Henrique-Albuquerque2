@@ -26,34 +26,27 @@ void data_task(void *p) {
 void process_task(void *p) {
     int data = 0;
 
-    // janela de 5 valores
     int window[5] = {0};
-    int index = 0;       // posição atual de escrita no vetor
-    int count = 0;       // número de amostras já recebidas
-    int sum = 0;         // soma acumulada
-
+    int count = 0;     
+    int sum = 0; 
     while (true) {
+
         if (xQueueReceive(xQueueData, &data, 100)) {
             // implementar filtro aqui!
-            // remove valor antigo da soma
-            sum -= window[index];
-
-            // adiciona novo valor
-            window[index] = data;
-            sum += data;
-
-            // avança circularmente no vetor
-            index = (index + 1) % 5;
-        
-            // conta inicial (antes de preencher as 5 posições)
-            if (count < 5) count++;
-
-            // calcula a média
-            int media = sum / count;
-
-            printf("%d\n", media);
-
-            // manter o delay
+            if (count < 5) {
+                window[count] = data;
+                count ++;
+            }
+            else{
+                sum = window[0];
+                for (size_t i = 1; i < 5; i++) {
+                    window[i - 1] = window[i];
+                    sum += window[i] / 5;
+                }
+                window[5] = data;
+                printf("%d \n", sum);
+            }
+            // deixar esse delay!
             vTaskDelay(pdMS_TO_TICKS(50));
         }
     }
