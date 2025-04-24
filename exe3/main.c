@@ -38,7 +38,7 @@ void process_task(void *p) {
             window[index] = data;
             sum += data;
             index = (index + 1) % 5;
-            if (count < 5) {
+            if (count > 5) {
                 count++;
                 int media = sum / count;
                 printf("%d\n", media);
