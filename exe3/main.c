@@ -39,7 +39,7 @@ void process_task(void *p) {
             index = (index + 1) % 5;
             count++;
             if (count > 5) {
-                int media = sum / count;
+                int media = sum / 5;
                 printf("%d\n", media);
             }
 
