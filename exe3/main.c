@@ -33,12 +33,14 @@ void process_task(void *p) {
 
     while (true) {
         if (xQueueReceive(xQueueData, &data, 100)) {
-            sum -= window[index];
+            if (count >= 5) {
+                sum -= window[index];
+            }
             window[index] = data;
             sum += data;
             index = (index + 1) % 5;
             count++;
-            if (count > 5) {
+            if (count >= 5) {
                 int media = sum / 5;
                 printf("%d\n", media);
             }
