@@ -26,11 +26,10 @@ void data_task(void *p) {
 void process_task(void *p) {
     int data = 0;
 
-    // janela de 5 valores
     int window[5] = {0};
-    int index = 0;       // posição atual de escrita no vetor
-    int count = 0;       // número de amostras já recebidas
-    int sum = 0;         // soma acumulada
+    int index = 0;       
+    int count = 0;       
+    int sum = 0;         
 
     while (true) {
         if (xQueueReceive(xQueueData, &data, 100)) {
@@ -38,8 +37,8 @@ void process_task(void *p) {
             window[index] = data;
             sum += data;
             index = (index + 1) % 5;
+            count++;
             if (count > 5) {
-                count++;
                 int media = sum / count;
                 printf("%d\n", media);
             }
