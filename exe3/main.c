@@ -44,8 +44,7 @@ void process_task(void *p) {
 
             // avança circularmente no vetor
             index = (index + 1) % 5;
-
-            
+        
             // conta inicial (antes de preencher as 5 posições)
             if (count < 5) count++;
 
