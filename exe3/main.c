@@ -40,10 +40,8 @@ void process_task(void *p) {
             sum += data;
             index = (index + 1) % 5;
             count++;
-            if (count >= 5) {
-                int media = sum / 5;
-                printf("%d\n", media);
-            }
+            int media = sum / 5;
+            printf("%d\n", media);
 
             // manter o delay
             vTaskDelay(pdMS_TO_TICKS(50));
